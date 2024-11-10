@@ -77,6 +77,10 @@ button {
   background: rgba(157, 86, 224, 0.7);
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 footer {
   padding-top: 10px;
   text-align: center;
