@@ -46,11 +46,13 @@ function updateNewCity(event) {
     clearInterval(cityIntervalId); // Stop the previous interval
   }
 
+  // Handling current location too
+  let cityTimeZone =
+    event.target.value === "current" ? moment.tz.guess() : event.target.value;
   // Capture the selected city's timezone and name
-  let cityTimeZone = event.target.value;
+
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let citiesElement = document.querySelector("#cities");
-
   // Define a function to update the city's date and time every second
   function updateCityInterval() {
     let cityTime = moment.tz(cityTimeZone); // Get the current time for the selected city
@@ -66,6 +68,7 @@ function updateNewCity(event) {
           "HH:mm:ss"
         )}</div>
       </div>
+      <a href="/">Back</a>
     `;
   }
   cityIntervalId = setInterval(updateCityInterval, 1000);
