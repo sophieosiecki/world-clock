@@ -40,7 +40,7 @@ select {
 .container {
   max-width: 350px;
   margin: 0 auto;
-  background-color: floralwhite;
+  background-color: #fffaf0;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 10px 8px 20px 7px rgba(255, 255, 255, 0.3);
@@ -56,6 +56,18 @@ select {
 
 .time {
   font-size: 26px;
+}
+
+.back {
+  padding-top: 10px;
+}
+button {
+  padding: 5px 10px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  background: rgba(157, 86, 224, 0.7);
 }
 
 footer {

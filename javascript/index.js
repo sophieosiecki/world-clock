@@ -68,7 +68,7 @@ function updateNewCity(event) {
           "HH:mm:ss"
         )}</div>
       </div>
-      <a href="/">Back</a>
+      <div class="back"><a href="/"><button>Back</button></a></div>
     `;
   }
   cityIntervalId = setInterval(updateCityInterval, 1000);
