@@ -1,41 +1,74 @@
+// Document query selectors
+let montrealElement = document.querySelector("#montreal");
+let londonElement = document.querySelector("#london");
+let tokyoElement = document.querySelector("#tokyo");
+
 // London Time
 function updateLondonTime() {
-  let londonElement = document.querySelector("#london");
-  let londonDateElement = londonElement.querySelector(".date");
-  let londonTimeElement = londonElement.querySelector(".time");
-  let londonTime = moment().tz("Europe/London");
+  if (londonElement.length != 0) {
+    let londonDateElement = londonElement.querySelector(".date");
+    let londonTimeElement = londonElement.querySelector(".time");
+    let londonTime = moment().tz("Europe/London");
 
-  londonDateElement.innerHTML = londonTime.format("dddd Do MMMM YYYY");
-  londonTimeElement.innerHTML = `${londonTime.format("H:m:s")}`;
-}
-
-// Los Angeles Time
-function updateLosAngelesTime() {
-  let losAngelesElement = document.querySelector("#los-angeles");
-  let losAngelesDateElement = losAngelesElement.querySelector(".date");
-  let losAngelesTimeElement = losAngelesElement.querySelector(".time");
-  let losAngelesTime = moment().tz("America/Los_Angeles");
-
-  losAngelesDateElement.innerHTML = losAngelesTime.format("dddd Do MMMM YYYY");
-  losAngelesTimeElement.innerHTML = `${losAngelesTime.format("H:m:s")}`;
+    londonDateElement.innerHTML = londonTime.format("dddd Do MMMM YYYY");
+    londonTimeElement.innerHTML = `${londonTime.format("HH:mm:ss")}`;
+  }
 }
 
 // Montreal Time
 function updateMontrealTime() {
-  let montrealElement = document.querySelector("#montreal");
   let montrealDateElement = montrealElement.querySelector(".date");
   let montrealTimeElement = montrealElement.querySelector(".time");
   let montrealTime = moment().tz("America/Montreal");
 
   montrealDateElement.innerHTML = montrealTime.format("dddd Do MMMM YYYY");
-  montrealTimeElement.innerHTML = `${montrealTime.format("H:m:s")}`;
+  montrealTimeElement.innerHTML = `${montrealTime.format("HH:mm:ss")}`;
 }
 
-updateLondonTime();
-setInterval(updateLondonTime, 1000);
+// Tokyo Time
+function updateTokyoTime() {
+  let tokyoDateElement = tokyoElement.querySelector(".date");
+  let tokyoTimeElement = tokyoElement.querySelector(".time");
+  let tokyoTime = moment().tz("Asia/Tokyo");
 
-updateLosAngelesTime();
-setInterval(updateLosAngelesTime, 1000);
+  tokyoDateElement.innerHTML = tokyoTime.format("dddd Do MMMM YYYY");
+  tokyoTimeElement.innerHTML = `${tokyoTime.format("HH:mm:ss")}`;
+}
+
+// Selected City time
+function updateNewCity(event) {
+  let cityTimeZone = event.target.value;
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  citiesElement = document.querySelector("#cities");
+  console.log(event);
+  citiesElement.innerHTML = `
+  <div class="city">
+                <div>
+                    <h2>${cityName}</h2>
+                    <div class="date">${cityTime.format(
+                      "dddd Do MMMM YYYY"
+                    )}</div>
+                </div>
+                <div class="time">${cityTime.format("HH:mm:ss")}</div>
+            </div>
+  `;
+}
+
+let selectElement = document.querySelector("#new-city");
+selectElement.addEventListener("change", updateNewCity);
+
+updateLondonTime();
+if (londonElement.length != 0) {
+  setInterval(updateLondonTime, 1000);
+}
 
 updateMontrealTime();
-setInterval(updateMontrealTime, 1000);
+if (montrealElement.length != 0) {
+  setInterval(updateMontrealTime, 1000);
+}
+
+updateTokyoTime();
+if (tokyoElement.length != 0) {
+  setInterval(updateTokyoTime, 1000);
+}
