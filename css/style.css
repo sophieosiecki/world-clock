@@ -22,6 +22,9 @@ a {
   color: #000000;
 }
 
+a:hover {
+  cursor: pointer;
+}
 .city {
   display: flex;
   justify-content: space-between;
